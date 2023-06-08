@@ -1,0 +1,75 @@
+type Query {
+    hello: String!
+
+
+    carById(id: String): Car
+    userById(id: String): User
+    allCars: [Car]
+    allUsers: [User]
+
+    #postgreSQL
+    allCustomers: [Customer]
+    customerById(id: String): Customer
+    #comapny
+    allCompanies: [Company]
+    companyById(id: String): Company
+
+
+}
+
+type Mutation {
+    createCar(id: String, name: String): Car
+    createUser(id: String, name: String, carId: String, carIds: [String]): User
+    #postgreSQL
+    createCustomer(customer: CustomerInput): Customer
+    #company
+    addCompany(company: CompanyInput): Company
+    updateCompany(id: String,company: CompanyInput): Company
+}
+
+#types
+# company
+type Company {
+    id: String
+    name: String
+    customers: [Customer]
+}
+input CompanyInput {
+    name: String!
+
+}
+# customer
+type Customer {
+    id: String
+    name: String
+}
+
+input CustomerInput {
+    name: String!
+}
+#----------------------------------
+type User {
+    id: String!
+    name: String!
+    car: Car
+    cars: [String]
+    autos: [Car]
+}
+
+type Car {
+    id: String!
+    name: String!
+    #user: User
+}
+
+input CarInput {
+    id: String!
+    name: String!
+}
+
+
+
+type Output {
+    name: String!
+}
+
